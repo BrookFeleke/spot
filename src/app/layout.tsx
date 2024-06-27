@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SessionProvider } from "next-auth/react";
 import "./globals.css";
+import { QueryClientProvider } from "react-query";
+import queryClient from "@/utils/queryClient";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <SessionProvider>
+          {/* <QueryClientProvider client={queryClient}> */}
+            {children}
+          {/* </QueryClientProvider> */}
+        </SessionProvider>
+      </body>
     </html>
   );
 }
